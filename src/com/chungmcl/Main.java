@@ -20,7 +20,7 @@ public class Main {
         InitializeBoard(board);
 
         // Start at the top left corner of board (count as already taking a move - Move 1)
-        board[0][0] = 1;
+        board[0][0] = 0;
 
         // Returns false if a knight's tour could not be generated
         if (!KnightsTour(board, 1, 0, 0))
@@ -44,7 +44,7 @@ public class Main {
     // Recursive function to generate a knights tour
     public static boolean KnightsTour(int[][] board, int moveCount, int currentX, int currentY)
     {
-        System.out.println(moveCount);
+        //System.out.println(moveCount);
         if (moveCount == Math.pow(boardSize, 2)) // If Knight touches all squares on chessboard
         {
             // Print out the chess board with the move number on each square
@@ -52,7 +52,7 @@ public class Main {
             {
                 for (int y = 0; y < boardSize; y++)
                 {
-                    System.out.print(board[x][y] + " ");
+                    System.out.print(board[x][y] + "\t");
                 }
                 System.out.println();
             }
@@ -60,18 +60,19 @@ public class Main {
         }
         else // If Knight hasn't touched all squares yet
         {
-            for (int i = 0; i < boardSize; i++)
+            for (int i = 0; i < possibleMoves.length; i++)
             {
                 int newX = currentX + possibleMoves[i][0];
                 int newY = currentY + possibleMoves[i][1];
                 if (ValidateMove(newX, newY, board))
                 {
-                    int[][] boardCopy = CopyBoard(board);
-                    boardCopy[newX][newY] = moveCount;
+                    //int[][] boardCopy = CopyBoard(board);
+                    board[newX][newY] = moveCount;
 
                     // Recursively call KnightsTour
-                    if (KnightsTour(boardCopy, moveCount + 1, newX, newY))
+                    if (KnightsTour(board, moveCount + 1, newX, newY))
                         return true;
+                    board[newX][newY] = -1;
                 }
             }
             return false;
