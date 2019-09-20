@@ -7,7 +7,7 @@ public class Main {
 
     // Possible "moves" a knight can make represented by deltaX/deltaY
     static final int[][] possibleMoves = new int[][] {
-            {2, 1}, {2, -1}, {-2, 1}, {-2, -1 }, {1, 2}, {1, -2}, {-1, 2}, {-1, -2}
+            {2, -1}, {1, -2}, {-1, -2}, {-2, -1 }, {-2, 1}, {-1, 2}, {1, 2}, {2, 1}
     };
 
 
