@@ -62,16 +62,15 @@ public class Main {
         {
             for (int i = 0; i < boardSize; i++)
             {
-                if (ValidateMove(currentX, currentY, possibleMoves[i][0], possibleMoves[i][1], board))
+                int newX = currentX + possibleMoves[i][0];
+                int newY = currentY + possibleMoves[i][1];
+                if (ValidateMove(newX, newY, board))
                 {
                     int[][] boardCopy = CopyBoard(board);
-                    boardCopy[currentX + possibleMoves[i][0]][currentY + possibleMoves[i][1]] = moveCount;
+                    boardCopy[newX][newY] = moveCount;
 
                     // Recursively call KnightsTour
-                    if (KnightsTour(boardCopy,
-                            moveCount + 1,
-                            currentX + possibleMoves[i][0],
-                            currentY + possibleMoves[i][1]))
+                    if (KnightsTour(boardCopy, moveCount + 1, newX, newY))
                         return true;
                 }
             }
@@ -81,12 +80,12 @@ public class Main {
 
     // Check if the move is valid
     // (Doesn't leave the board, doesn't go to a square that the Knight has already been to)
-    public static boolean ValidateMove(int x, int y, int deltaX, int deltaY, int[][] board)
+    public static boolean ValidateMove(int newX, int newY, int[][] board)
     {
         return (
-                (x + deltaX >= 0 && x + deltaX < boardSize)
-                && (y + deltaY >= 0 && y + deltaY < boardSize)
-                && (board[x + deltaX][y + deltaY] == -1)
+                (newX >= 0 && newX < boardSize)
+                && (newY >= 0 && newY < boardSize)
+                && (board[newX][newY] == -1)
                 );
     }
 
